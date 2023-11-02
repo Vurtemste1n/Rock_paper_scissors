@@ -14,24 +14,24 @@ function getComputerChoice() {
 }
 function round(playerSelection,computerSelection) {
     let message = "";
-    if (computerSelection == 'rock' && playerSelection == 'rock') {
+    if (computerSelection == playerSelection) {
         message = ('You are even!');
-    } else if (playerSelection == 'paper' && computerSelection == 'rock') {
-        message = (playerSelection + " beats " + computerSelection + ". You win!");
-    } else if (playerSelection == 'rock' && computerSelection == 'scissors') {
-        message = (playerSelection + " beats " + computerSelection + ". You win!");
-    } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
-        message = (playerSelection + " beats " + computerSelection + ". You win!");
-    } else {
-        message = (computerSelection + " beats " + playerSelection + ". You lost!");
-    }
+    } else if (playerSelection == "paper" && computerSelection == "rock") {
+        message = (firstLetter(playerSelection) + " beats " + computerSelection + ". You win!");
+    } else if (playerSelection == "rock" && computerSelection == "scissors") {
+        message = (firstLetter(playerSelection) + " beats " + computerSelection + ". You win!");
+    } else if (playerSelection == "scissors" && computerSelection == "paper") {
+        message = (firstLetter(playerSelection) + " beats " + computerSelection + ". You win!");
+    } else 
+        message = (firstLetter(computerSelection) + " beats " + playerSelection + ". You lost!");
+    
     return message;
 }
 function game() {
     let playerScore = 0;
     let computerScore = 0;
     for (let i = 0; i <= 4; i++) {
-        let computerSelection = getComputerChoice();
+        let computerSelection = caseSens(getComputerChoice());
         let playerSelection = caseSens(prompt("Enter your choice here: "));
         console.log(round(playerSelection,computerSelection));
         if (round(playerSelection,computerSelection).substr(-8) == "You win!" ) {
@@ -52,6 +52,11 @@ function game() {
 function caseSens(userPrompt) {
     let caseLow = userPrompt.toLowerCase();
     return caseLow;
+}
+function firstLetter(string) {
+    let lowerCase = string.toLowerCase();
+    let bigLetter = (lowerCase.slice(0,1)).toUpperCase() + lowerCase.slice(1);
+    return bigLetter;
 }
 
 (game());
