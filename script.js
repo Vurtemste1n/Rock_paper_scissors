@@ -32,7 +32,7 @@ function game() {
     let computerScore = 0;
     for (let i = 0; i <= 4; i++) {
         let computerSelection = getComputerChoice();
-        let playerSelection = prompt("Enter your choice here: ");
+        let playerSelection = caseSens(prompt("Enter your choice here: "));
         console.log(round(playerSelection,computerSelection));
         if (round(playerSelection,computerSelection).substr(-8) == "You win!" ) {
             playerScore = ++playerScore;
@@ -48,6 +48,10 @@ function game() {
         console.log("You have won " + playerScore + " rounds. Your computer has won " + computerScore + " rounds.You won the game!");
     } else console.log("You have won " + playerScore + " rounds. Your computer has won " + computerScore + " rounds.You lost the game!");
     return ;
+}
+function caseSens(userPrompt) {
+    let caseLow = userPrompt.toLowerCase();
+    return caseLow;
 }
 
 (game());
