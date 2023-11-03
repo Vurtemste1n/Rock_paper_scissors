@@ -27,28 +27,16 @@ function round(playerSelection,computerSelection) {
     
     return message;
 }
-function game() {
+function score(textContent) {
     let playerScore = 0;
     let computerScore = 0;
-    for (let i = 0; i <= 4; i++) {
-        let computerSelection = caseSens(getComputerChoice());
-        let playerSelection = caseSens(prompt("Enter your choice here: "));
-        console.log(round(playerSelection,computerSelection));
-        if (round(playerSelection,computerSelection).substr(-8) == "You win!" ) {
+        if (textContent.substr(-8) == "You win!" ) {
             playerScore = ++playerScore;
         }
-        if (round(playerSelection,computerSelection).substr(-9) == "You lost!" ) {
+        if (textContent.substr(-9) == "You lost!" ) {
             computerScore = ++computerScore;
-        }
+        } return [playerScore,computerScore];
     }
-    if (playerScore == computerScore) {
-        console.log("Yor are even! You and your computer have equal score.")
-    }
-    else if (playerScore > computerScore) {
-        console.log("You have won " + playerScore + " rounds. Your computer has won " + computerScore + " rounds.You won the game!");
-    } else console.log("You have won " + playerScore + " rounds. Your computer has won " + computerScore + " rounds.You lost the game!");
-    return ;
-}
 function caseSens(userPrompt) {
     let caseLow = userPrompt.toLowerCase();
     return caseLow;
@@ -58,33 +46,92 @@ function firstLetter(string) {
     let bigLetter = (lowerCase.slice(0,1)).toUpperCase() + lowerCase.slice(1);
     return bigLetter;
 }
-let playerSelection;
-const btnRock = document.querySelector("#rock");
-const btnPaper = document.querySelector("#paper");
-const btnScissors = document.querySelector("#scissors");
-const btnClear = document.querySelector("#clear");
-const result = document.querySelector("#result");
 
-btnRock.addEventListener("click",() => {
-    playerSelection = btnRock.textContent;
-    const para = document.createElement('p');
-    result.appendChild(para);
-    para.textContent = round(caseSens(playerSelection),getComputerChoice());
-});
-btnPaper.addEventListener("click",() => {
-    playerSelection = btnPaper.textContent;
-    const para = document.createElement('p');
-    result.appendChild(para);
-    para.textContent = round(caseSens(playerSelection),getComputerChoice());
-});
-btnScissors.addEventListener("click",() => {
-    playerSelection = btnScissors.textContent;
-    const para = document.createElement('p');
-    result.appendChild(para);
-    para.textContent = round(caseSens(playerSelection),getComputerChoice());
-});
+    let playerSelection;
+    const btnRock = document.querySelector("#rock");
+    const btnPaper = document.querySelector("#paper");
+    const btnScissors = document.querySelector("#scissors");
+    const btnClear = document.querySelector("#clear");
+    const result = document.querySelector("#result");
+    const playerScoreTracker = document.querySelector("#playerScore");
+    const computerScoreTracker = document.querySelector("#computerScore");
+    playerScoreTracker.textContent = "0";
+    computerScoreTracker.textContent = "0";
+    let scoreTracker; 
+    btnRock.addEventListener("click",() => {
+        playerSelection = btnRock.textContent;
+        const para = document.createElement('p');
+        result.appendChild(para);
+        para.textContent = round(caseSens(playerSelection),getComputerChoice());
+        scoreTracker = score(para.textContent);
+        playerScoreTracker.textContent = `${Number(playerScoreTracker.textContent) + scoreTracker[0]}`;
+        computerScoreTracker.textContent = `${Number(computerScoreTracker.textContent) + scoreTracker[1]}`;
+            if (playerScoreTracker.textContent == '5') {
+                result.textContent = '';
+                playerScoreTracker.textContent = '0';
+                computerScoreTracker.textContent = '0';
+                para.textContent = "Player has won!";
+                result.appendChild(para);
+            } else if (computerScoreTracker.textContent == '5') {
+                result.textContent = '';
+                playerScoreTracker.textContent = '0';
+                computerScoreTracker.textContent = '0';
+                para.textContent = "Player has won!";
+                result.appendChild(para);
+            }
+    });
+    btnPaper.addEventListener("click",() => {
+        playerSelection = btnPaper.textContent;
+        const para = document.createElement('p');
+        result.appendChild(para);
+        para.textContent = round(caseSens(playerSelection),getComputerChoice());
+        scoreTracker = score(para.textContent);
+        playerScoreTracker.textContent = `${Number(playerScoreTracker.textContent) + scoreTracker[0]}`;
+        computerScoreTracker.textContent = `${Number(computerScoreTracker.textContent) + scoreTracker[1]}`;
+        if (playerScoreTracker.textContent == '5') {
+            result.textContent = '';
+            playerScoreTracker.textContent = '0';
+            computerScoreTracker.textContent = '0';
+            para.textContent = "Player has won!";
+            result.appendChild(para);
+        } else if (computerScoreTracker.textContent == '5') {
+            result.textContent = "";
+            playerScoreTracker.textContent = '0';
+            computerScoreTracker.textContent = '0';
+            para.textContent = "Computer has won!";
+            result.appendChild(para);
+        }
+
+    });
+        btnScissors.addEventListener("click",() => {
+        playerSelection = btnScissors.textContent;
+        const para = document.createElement('p');
+        result.appendChild(para);
+        para.textContent = round(caseSens(playerSelection),getComputerChoice());
+        scoreTracker = score(para.textContent);
+        playerScoreTracker.textContent = `${Number(playerScoreTracker.textContent) + scoreTracker[0]}`;
+        computerScoreTracker.textContent = `${Number(computerScoreTracker.textContent) + scoreTracker[1]}`;
+        if (playerScoreTracker.textContent == '5') {
+            result.textContent = '';
+            playerScoreTracker.textContent = '0';
+            computerScoreTracker.textContent = '0';
+            para.textContent = "Player has won!";
+            result.appendChild(para);
+        } else if (computerScoreTracker.textContent == '5') {
+            result.textContent = '';
+            playerScoreTracker.textContent = '0';
+            computerScoreTracker.textContent = '0';
+            para.textContent = "Player has won!";
+            result.appendChild(para);
+        }
+
+    }); 
+
 btnClear.addEventListener("click",() => {
     result.textContent = '';
+    playerScoreTracker.textContent = '0';
+    computerScoreTracker.textContent = '0';
 });
+
 
 
