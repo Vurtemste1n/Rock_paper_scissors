@@ -58,5 +58,33 @@ function firstLetter(string) {
     let bigLetter = (lowerCase.slice(0,1)).toUpperCase() + lowerCase.slice(1);
     return bigLetter;
 }
+let playerSelection;
+const btnRock = document.querySelector("#rock");
+const btnPaper = document.querySelector("#paper");
+const btnScissors = document.querySelector("#scissors");
+const btnClear = document.querySelector("#clear");
+const result = document.querySelector("#result");
 
-(game());
+btnRock.addEventListener("click",() => {
+    playerSelection = btnRock.textContent;
+    const para = document.createElement('p');
+    result.appendChild(para);
+    para.textContent = round(caseSens(playerSelection),getComputerChoice());
+});
+btnPaper.addEventListener("click",() => {
+    playerSelection = btnPaper.textContent;
+    const para = document.createElement('p');
+    result.appendChild(para);
+    para.textContent = round(caseSens(playerSelection),getComputerChoice());
+});
+btnScissors.addEventListener("click",() => {
+    playerSelection = btnScissors.textContent;
+    const para = document.createElement('p');
+    result.appendChild(para);
+    para.textContent = round(caseSens(playerSelection),getComputerChoice());
+});
+btnClear.addEventListener("click",() => {
+    result.textContent = '';
+});
+
+
